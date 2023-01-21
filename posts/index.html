@@ -9,23 +9,29 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
+
 <link rel="canonical" href="/posts/" />
 
 
 
 
-<link rel="stylesheet" href="/assets/style.css">
-
-  <link rel="stylesheet" href="/assets/green.css">
 
 
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
 
 
 
 
-<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
 
-  <link rel="shortcut icon" href="/img/favicon/green.png">
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/green.png">
 
 
 
@@ -49,8 +55,8 @@
     <meta property="og:image" content="/img/favicon/green.png">
   
 
-<meta property="og:image:width" content="2048">
-<meta property="og:image:height" content="1024">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
 
 
 
@@ -83,12 +89,42 @@
 
     </div>
     
-      <div class="menu-trigger">menu</div>
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="https://medium.com/@LIL__NIX">Medium</a></li>
+        
+      
+        
+          <li><a href="/index.xml">RSS</a></li>
+        
+      
+        
+          <li><a href="https://twitch.tv/thelilnix">Twitch</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/thelilnix">Twitter</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
     
   </div>
   
-    <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
     
       
         
@@ -104,41 +140,14 @@
         
       
         
-          <li><a href="https://twitch.tv/lil__nix">Twitch</a></li>
+          <li><a href="https://twitch.tv/thelilnix">Twitch</a></li>
         
       
         
-          <li><a href="https://twitter.com/Lil__Nix">Twitter</a></li>
+          <li><a href="https://twitter.com/thelilnix">Twitter</a></li>
         
       
       
-    
-
-    
-  </ul>
-
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="/about">About</a></li>
-      
-    
-      
-        <li><a href="https://medium.com/@LIL__NIX">Medium</a></li>
-      
-    
-      
-        <li><a href="/index.xml">RSS</a></li>
-      
-    
-      
-        <li><a href="https://twitch.tv/lil__nix">Twitch</a></li>
-      
-    
-      
-        <li><a href="https://twitter.com/Lil__Nix">Twitter</a></li>
-      
-    
     
   </ul>
 </nav>
@@ -152,14 +161,16 @@
   
   <div class="posts">
     
-      <div class="post on-list">
+      <article class="post on-list">
         <h1 class="post-title">
           <a href="/posts/the-story-of-a-rce-on-a-java-web-application/">The Story of an RCE on a Java Web Application</a>
         </h1>
         <div class="post-meta">
-          <span class="post-date">
-            2022-01-27
-          </span>
+          
+            <time class="post-date">
+              2022-01-27 ::
+            </time>
+          
           
         </div>
 
@@ -168,32 +179,30 @@
         
 
 
-      
         <div class="post-content">
           
-          
-          It was about two months ago (November 2021) I was invited to a private program. According to their program scope, I decided to hack them for a while. This post is about a vulnerability I’ve found in this company that led to RCE.
+            It was about two months ago (November 2021) I was invited to a private program. According to their program scope, I decided to hack them for a while. This post is about a vulnerability I’ve found in this company that led to RCE.
 Reconnaissance In this step, my recon methodology was not finding some unique subdomains or assets. I was searching for some web applications with some interesting features such as login or file upload.
-          
           
         </div>
 
         
-        <div>
-          <a class="read-more button"
-            href="/posts/the-story-of-a-rce-on-a-java-web-application/">Read more →</a>
-        </div>
+          <div>
+            <a class="read-more button" href="/posts/the-story-of-a-rce-on-a-java-web-application/">Read more →</a>
+          </div>
         
-      </div>
+      </article>
     
-      <div class="post on-list">
+      <article class="post on-list">
         <h1 class="post-title">
           <a href="/posts/hello-world/">Hello World</a>
         </h1>
         <div class="post-meta">
-          <span class="post-date">
-            2021-12-08
-          </span>
+          
+            <time class="post-date">
+              2021-12-08 ::
+            </time>
+          
           
         </div>
 
@@ -202,21 +211,21 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
         
 
 
-      
         <div class="post-content">
           
-          
+            Hello world :)
+As you know, I’m LIL NIX x_x, just a hacker and this is my first post. Here I will share my findings, hope you enjoy.
           
         </div>
 
         
-        <div>
-          <a class="read-more button"
-            href="/posts/hello-world/">Read more →</a>
-        </div>
+          <div>
+            <a class="read-more button" href="/posts/hello-world/">Read more →</a>
+          </div>
         
-      </div>
+      </article>
     
+
     <div class="pagination">
   <div class="pagination__buttons">
     
@@ -235,15 +244,17 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
       <div class="copyright copyright--user">
         <span>© LILNIX</span>
     
-        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
       </div>
   </div>
 </footer>
 
-<script src="/assets/main.js"></script>
-<script src="/assets/prism.js"></script>
 
 
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
 
 
 

